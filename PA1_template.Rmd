@@ -1,9 +1,16 @@
 ---
-title: "PA_1template.Rmd"
+title: "Wk 2 Assignment"
 author: "Jackson Little"
 date: "November 2, 2017"
 output: md_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
 Reproducible Research: Peer Assessment 1
 ========================================
 
@@ -32,9 +39,10 @@ colnames(sumTable)<- c("Date", "Steps")
 ```
 
 Building the Histogram for the question concerning mean
-```{r}
-hist(sumTable$Steps, breaks=5, xlab="Steps", main= "Total Number of Steps per Day")
+```{r Chart1}
+Chart1 <- hist(sumTable$Steps, breaks=5, xlab="Steps", main= "Total Number of Steps per Day")
 ```
+![](Charts/Chart1.png)<!-- -->
 
 Time to Calculate Mean
 ```{r}
@@ -49,11 +57,12 @@ as.integer(median(sumTable$Steps))
 We get 10766 for the mean and 10765 for the median
 
 Now it's time for the determining daily activity
-```{r}
+```{r Chart2}
 intervalTable <- ddply(clean, .(interval), summarize, Avg = mean(steps))
 p <- ggplot(intervalTable, aes(x=interval, y=Avg), xlab = "Interval", ylab = "Average Number of Steps")
 p + geom_line()+xlab("Interval")+ylab("Average Number of Steps")+ggtitle("Average Number of Steps per Standard Interval")
 ```
+![](Charts/Chart2.png)<!-- -->
 
 Determining which 5 min. interval has the max number of steps
 ```{r}
@@ -98,11 +107,14 @@ as.integer(median(sumTable2$Steps))
 so now we get 10821 for the mean and 11015 for the median
 
 Time to build the histogram
-```{r}
-hist(sumTable2$Steps, breaks=5, xlab="Steps", main = "Total Steps per Day with NAs Fixed", col="green")
+```{r Chart3}
+chart3 <- hist(sumTable2$Steps, breaks=5, xlab="Steps", main = "Total Steps per Day with NAs Fixed", col="green")
 hist(sumTable$Steps, breaks=5, xlab="Steps", main = "Total Steps per Day with NAs Fixed", col="red", add=T)
 legend("topright", c("Imputed Data", "Non-NA Data"), fill=c("green", "red") )
+
 ```
+![](Charts/Chart3.png)<!-- -->
+
 
 With this histogram we get a better idea: The mean stands at 10821 as opposed to the original 10766 and the median stands at 11015 as opposed to 10765. We have a difference of 55 and 250 respectively but the general nature of the distribution holds true.
 ```{r}
@@ -110,12 +122,14 @@ mergeData$DayCategory <- ifelse(mergeData$day %in% c("Saturday", "Sunday"), "Wee
 ```
 
 time to build
-```{r}
+```{r chart 4}
 library(lattice)
 intervalTable2 <- ddply(mergeData, .(interval, DayCategory), summarize, Avg = mean(steps))
 xyplot(Avg~interval|DayCategory, data=intervalTable2, type="l",  layout = c(1,2),
        main="Average Steps per Interval Based on Weekend/Weekday", 
        ylab="Average Steps", xlab="Interval")
 ```
+![](Charts/Chart4.png)<!-- -->
 
-Now we see that activity levels vary considerably between Weekends and standard weekdays. This is probably due to the amount of leisure time available to people during the off days. 
+
+Now we see that activity levels vary considerably between Weekends and standard weekdays. This is probably due to the amount of leisure time available to people during the off days.

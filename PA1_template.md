@@ -1,3 +1,7 @@
+This is an R Markdown document. Markdown is a simple formatting syntax
+for authoring HTML, PDF, and MS Word documents. For more details on
+using R Markdown see <http://rmarkdown.rstudio.com>.
+
 Reproducible Research: Peer Assessment 1
 ========================================
 
@@ -23,9 +27,10 @@ What is the mean of the total number of steps take per day?
 
 Building the Histogram for the question concerning mean
 
-    hist(sumTable$Steps, breaks=5, xlab="Steps", main= "Total Number of Steps per Day")
+    Chart1 <- hist(sumTable$Steps, breaks=5, xlab="Steps", main= "Total Number of Steps per Day")
 
-![](PA1_template_files/figure-markdown_strict/unnamed-chunk-5-1.png)
+![](PA1_template_files/figure-markdown_strict/Chart1-1.png)
+![](Charts/Chart1.png)<!-- -->
 
 Time to Calculate Mean
 
@@ -47,7 +52,8 @@ Now it's time for the determining daily activity
     p <- ggplot(intervalTable, aes(x=interval, y=Avg), xlab = "Interval", ylab = "Average Number of Steps")
     p + geom_line()+xlab("Interval")+ylab("Average Number of Steps")+ggtitle("Average Number of Steps per Standard Interval")
 
-![](PA1_template_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+![](PA1_template_files/figure-markdown_strict/Chart2-1.png)
+![](Charts/Chart2.png)<!-- -->
 
 Determining which 5 min. interval has the max number of steps
 
@@ -98,11 +104,12 @@ so now we get 10821 for the mean and 11015 for the median
 
 Time to build the histogram
 
-    hist(sumTable2$Steps, breaks=5, xlab="Steps", main = "Total Steps per Day with NAs Fixed", col="green")
+    chart3 <- hist(sumTable2$Steps, breaks=5, xlab="Steps", main = "Total Steps per Day with NAs Fixed", col="green")
     hist(sumTable$Steps, breaks=5, xlab="Steps", main = "Total Steps per Day with NAs Fixed", col="red", add=T)
     legend("topright", c("Imputed Data", "Non-NA Data"), fill=c("green", "red") )
 
-![](PA1_template_files/figure-markdown_strict/unnamed-chunk-15-1.png)
+![](PA1_template_files/figure-markdown_strict/Chart3-1.png)
+![](Charts/Chart3.png)<!-- -->
 
 With this histogram we get a better idea: The mean stands at 10821 as
 opposed to the original 10766 and the median stands at 11015 as opposed
@@ -119,7 +126,8 @@ time to build
            main="Average Steps per Interval Based on Weekend/Weekday", 
            ylab="Average Steps", xlab="Interval")
 
-![](PA1_template_files/figure-markdown_strict/unnamed-chunk-17-1.png)
+![](PA1_template_files/figure-markdown_strict/chart%204-1.png)
+![](Charts/Chart4.png)<!-- -->
 
 Now we see that activity levels vary considerably between Weekends and
 standard weekdays. This is probably due to the amount of leisure time
